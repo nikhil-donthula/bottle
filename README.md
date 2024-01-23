@@ -20,9 +20,9 @@ docker build --tag image-name:tag .
 ```
 docker build -t ghcr.io/nikhil-donthula/bottle:1.0.0 --build-arg DESCRIPTION=bottle .
 ```
-```
+
 docker images
-```
+
 ```
 docker inspect <id/name:tag>
 ```
@@ -45,7 +45,8 @@ Listing Docker containers
 docker ps -a
 ```
 ```
-docker container ls```
+docker container ls
+```
 Docker container logs
 ```
 docker logs container-id
@@ -73,4 +74,17 @@ docker login ghcr.io
 docker push ghcr.io/nikhil-donthula/bottle:1.0.0
 ```
 
+Rancher local setup
+```
+kubectl config get-contexts
+```
+```
+kubectl config use-context "rancher-desktop"
+```
+##helm commands
+###creating helm files - one time job
+helm create <chart_name>
+```
+helm create helm-bottle
+``` 
 Azure login
