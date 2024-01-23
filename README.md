@@ -72,3 +72,5 @@ docker login ghcr.io
 ```
 docker push ghcr.io/nikhil-donthula/bottle:1.0.0
 ```
+
+Azure login
