@@ -81,10 +81,43 @@ kubectl config get-contexts
 ```
 kubectl config use-context "rancher-desktop"
 ```
-##helm commands
-###creating helm files - one time job
+## helm commands
+### creating helm files - one time job
 helm create <chart_name>
 ```
 helm create helm-bottle
 ``` 
+
+```
+helm upgrade --install bottle helm-bottle/ --set image.tag=1.0.0 --namespace bottle-namespace --create-namespace --wait
+```
+
+```
+
+kubectl get pods -A -o wide
+```
+```
+kubectl -n bottle-namespace describe pod bottle-helm-bottle-ffd99f449-hf2cj
+```
+```
+kubectl -n bottle-namespace describe pod bottle-
+```
+```
+kubectl get pods -n bottle-namespace
+```
+```
+kubectl -n bottle-namespace delete pod demo-helm-bottle-549c86f97b-f649j
+```
+```
+helm uninstall demo --namespace bottle-namespace
+```
+```
+kubectl describe pod bottle- -n bottle-namespace
+```
+```
+kubectl exec -it bottle- -- curl http://localhost:8080
+```
+```
+ubectl exec -it bottle-helm-bottle-ffd99f449-hf2cj -n bottle-namespace -- curl http://localhost:8080
+```
 Azure login
