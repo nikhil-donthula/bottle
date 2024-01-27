@@ -12,7 +12,10 @@ Build
 ```
 ./gradlew build
 ```
-
+For generating wrapper
+```
+gradle wrapper
+```
 Building Docker image
 ```
 docker build --tag image-name:tag .
@@ -33,8 +36,7 @@ Run Docker Container
 docker run -p host-port:container-port image-name:tag
 ```
 ```
-docker run -d -p 8081:8080 ghcr.io/nikhil-donthula/bottle:1.0.
-0
+docker run -d -p 8080:8080 ghcr.io/nikhil-donthula/bottle:1.0.0
 ```
 naming convention ghcr.io/your-username/your-repo-name:tag
 
