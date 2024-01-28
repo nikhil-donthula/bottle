@@ -5,6 +5,7 @@ Run the application
 ```
 ./gradlew bootRun
 ```
+http://localhost:8080/
 <img align=center src=assets/localhost001.png> 
 
 Build
@@ -72,6 +73,9 @@ Login to github container registry
 ```
 docker login ghcr.io
 ```
+if you get error in linux as below follow the link :
+Error saving credentials: error storing credentials - err: exit status 1, out: `pass not initialized: exit status 1: Error: password store is empty. Try "pass init".`
+https://docs.docker.com/desktop/get-started/#credentials-management-for-linux-users
 ```
 docker push ghcr.io/nikhil-donthula/bottle:1.0.0
 ```
@@ -89,15 +93,46 @@ helm create <chart_name>
 ```
 helm create helm-bottle
 ``` 
-
+Validating charts for any syntax errors
+```
+helm lint helm-bottle
+```
 ```
 helm upgrade --install bottle helm-bottle/ --set image.tag=1.0.0 --namespace bottle-namespace --create-namespace --wait
 ```
-
+if upgrade takes more than 5min add timeout flag
 ```
-
+helm upgrade --install bottle helm-bottle/ --set image.tag=1.0.0 --namespace bottle-namespace --create-namespace --wait --timeout=15m
+```
+If set, upgrade process rolls back changes made in case of failed upgrade.
+```
+helm upgrade <release> <chart> --atomic                   
+```
+See all the revisons of the deployment
+```
+helm history bottle -n bottle-namespace
+```
+helm rollback to previous version
+```
+helm rollback bottle -n bottle-namespace
+```
+```
+helm status bottle -n bottle-namespace
+```
+list all the relesses
+helm list -all
+```
+helm list -A
+```
+list all pods
+```
 kubectl get pods -A -o wide
 ```
+list pods in specific namespace
+```
+kubectl get pods -n bottle-namespace
+```
+Full details of a pod
 ```
 kubectl -n bottle-namespace describe pod bottle-helm-bottle-ffd99f449-hf2cj
 ```
@@ -105,21 +140,37 @@ kubectl -n bottle-namespace describe pod bottle-helm-bottle-ffd99f449-hf2cj
 kubectl -n bottle-namespace describe pod bottle-
 ```
 ```
-kubectl get pods -n bottle-namespace
+kubectl describe pod bottle- -n bottle-namespace
 ```
+delete a pod
 ```
 kubectl -n bottle-namespace delete pod demo-helm-bottle-549c86f97b-f649j
 ```
+unistall a release created with helm
 ```
-helm uninstall demo --namespace bottle-namespace
+helm uninstall bottle --namespace bottle-namespace
 ```
+portforward to access application - Forward a local port to a port on the Pod 
 ```
-kubectl describe pod bottle- -n bottle-namespace
+kubectl port-forward pods/bottle-helm-bottle-7679d8b56f-8gwxf -n bottle-namespace 8080:8080
 ```
+
 ```
 kubectl exec -it bottle- -- curl http://localhost:8080
 ```
 ```
-ubectl exec -it bottle-helm-bottle-ffd99f449-hf2cj -n bottle-namespace -- curl http://localhost:8080
+kubectl exec -it bottle-helm-bottle-ffd99f449-hf2cj -n bottle-namespace -- curl http://localhost:8080
 ```
 Azure login
+```
+az login
+```
+Set the cluster subscription
+```
+az account set --subscription 531ccf55-a0e0-nnn5-9e2a-aff7b95e45f1
+```
+Download cluster credentials
+```
+az aks get-credentials --resource-group jan28 --name bottle-cluster --overwrite-existing
+```
+Now you are connected to cluster
