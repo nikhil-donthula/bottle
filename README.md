@@ -66,6 +66,9 @@ Delete docker image
 ```
 docker image rm image-name:tag
 ```
+```
+docker rmi ghcr.io/nikhil-donthula/bottle:1.0.1
+```
 
 Pushing Docker image to github packages
 
@@ -86,6 +89,11 @@ kubectl config get-contexts
 ```
 ```
 kubectl config use-context "rancher-desktop"
+kubectl config use-context rancher-desktop
+```
+delete a config context
+```
+kubectl config delete-context bottle
 ```
 ## helm commands
 ### creating helm files - one time job
@@ -97,12 +105,29 @@ Validating charts for any syntax errors
 ```
 helm lint helm-bottle
 ```
+to preview rendered templates before installation
+```
+helm template helm-bottle
+```
 ```
 helm upgrade --install bottle helm-bottle/ --set image.tag=1.0.0 --namespace bottle-namespace --create-namespace --wait
 ```
 if upgrade takes more than 5min add timeout flag
 ```
 helm upgrade --install bottle helm-bottle/ --set image.tag=1.0.0 --namespace bottle-namespace --create-namespace --wait --timeout=15m
+```
+see all the secretes in a namespace
+```
+kubectl get secrets -n bottle-namespace
+```
+Create a secret to pull private image from github package repository ghcrk
+```
+kubectl create secret docker-registry mysecretname --docker-server=https://ghcr.io --docker-username=mygithubusername --docker-password=mygithubreadtoken --docker-email=mygithubemail
+```
+Secrets are namespace specific
+delete a secret
+```
+kubectl delete secret ghcr-imagepull-secret -n bottle-namespace
 ```
 If set, upgrade process rolls back changes made in case of failed upgrade.
 ```
@@ -174,3 +199,9 @@ Download cluster credentials
 az aks get-credentials --resource-group jan28 --name bottle-cluster --overwrite-existing
 ```
 Now you are connected to cluster
+
+
+Kubernetes pod errors:
+ErrImagePull > the initial error indicating a failed image pull. authentication error with ghcr.io OR image not prrsent in repo
+ImagePullBackOff     > consequence of repeated ErrImagePull attempts, providing a waiting period for potential resolution. container could not start because Kubernetes could not pull a container image (for reasons such as invalid image name, or pulling from a private registry without imagePullSecret). 
+crashloopBackOff > 

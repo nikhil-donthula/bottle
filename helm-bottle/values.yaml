@@ -12,7 +12,8 @@ image:
   tag: 1.0.0
   containerPort: 8080
 
-imagePullSecrets: []
+imagePullSecrets: #[]
+  - name: ghcr-imagepull-secret
 nameOverride: ""
 fullnameOverride: ""
 

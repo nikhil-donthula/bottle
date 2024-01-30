@@ -43,15 +43,15 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: http
-            initialDelaySeconds: 100       
+              port: 8080
+            initialDelaySeconds: 20       
             periodSeconds: 20
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /
-              port: http
-            initialDelaySeconds: 100
+              port: 8080
+            initialDelaySeconds: 20
             periodSeconds: 20
             timeoutSeconds: 10
           resources:
