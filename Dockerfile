@@ -4,6 +4,8 @@ EXPOSE 8080
 
 WORKDIR /app
 
-COPY /build/libs/bottle-0.0.1-SNAPSHOT.jar /app/bottle-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=/build/libs/bottle-0.0.1-SNAPSHOT.jar
 
-ENTRYPOINT ["java", "-jar", "./bottle-0.0.1-SNAPSHOT.jar"]
+COPY ${JAR_FILE} /app/app.jar
+
+ENTRYPOINT ["java", "-jar", "./app.jar"]
