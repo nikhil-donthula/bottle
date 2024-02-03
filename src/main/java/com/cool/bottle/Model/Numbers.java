@@ -1,4 +1,4 @@
-package com.cool.bottle;
+package com.cool.bottle.Model;
 
 
 public class Numbers {
