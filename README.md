@@ -13,6 +13,9 @@ Build
 ```
 ./gradlew build
 ```
+```
+./gradlew build --refresh-dependencies
+```
 For generating wrapper
 ```
 gradle wrapper
@@ -48,7 +51,7 @@ Listing Docker containers
 docker ps -a
 ```
 ```
-docker container ls
+docker container ls -a
 ```
 Docker container logs
 ```
