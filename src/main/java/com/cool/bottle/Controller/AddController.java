@@ -14,7 +14,7 @@ public class AddController {
         return numbers.getNum1() + numbers.getNum2();
     }
     // JSON INPUT
-    /* 
+    /* http://localhost:8080/add
     {
         "num1": 10,
         "num2": 20

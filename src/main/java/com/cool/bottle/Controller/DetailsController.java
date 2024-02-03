@@ -28,5 +28,16 @@ public class DetailsController {
         return detailsService.getName(id);
 
     }
+    // JSON INPUT
+    /* http://localhost:8080/addDetails
+    {
+        "uniqueId": 2,
+        "firstName": "nikhil",
+        "lastName": "donthula",
+        "country": "Bharat"  
+    }     
+     */
+    
+    //http://localhost:8080/getName/<id>
 
 }
