@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:$MONGODB_DOCKER_VERSION
+    container_name: $MONGODB_DOCKER_CONTAINER_NAME
+    ports:
+      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+    volumes:
+      - mongodb-data:/data/db
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=root
+    #   - MONGO_INITDB_ROOT_PASSWORD=password
+
+  mongo-express:
+    image: mongo-express:0.54.0
+    container_name: mongo-express
+    depends_on:
+      - mongodb
+    environment:
+      # - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      # - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    restart: unless-stopped
+    ports:
+      - "8881:8081"
+      
+  bottle-app:
+    build: .
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+    depends_on:
+      - mongodb
+    container_name: $APP_CONTAINER_NAME
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:$MONGODB_DOCKER_PORT/$MONGODB_DATABASE
+      # Other Spring Boot environment variables needed for your application
+
+volumes:
+  mongodb-data:
+
+
+networks:
+  default:
+    name: bottle-network
+
