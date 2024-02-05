@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  mongodb:
+    env_file: ./.env
+    image: mongo:$MONGODB_DOCKER_VERSION
+    container_name: $MONGODB_DOCKER_CONTAINER_NAME
+    ports:
+      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+
+  mongo-express:
+    image: mongo-express:$MONGOEXP_DOCKER_VERSION
+    container_name: $MONGOEXP_DOCKER_CONTAINER_NAME
+    depends_on:
+      - mongodb
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=$MONGODB_USER
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=$MONGODB_PASSWORD
+      - ME_CONFIG_MONGODB_SERVER=$MONGODB_DOCKER_CONTAINER_NAME
+    restart: unless-stopped
+    ports:
+      - $MONGOEXP_LOCAL_PORT:$MONGOEXP_DOCKER_PORT
+      
+  bottle-app:
+    env_file: ./.env
+    build: .
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+    depends_on:
+      - mongodb
+    container_name: $APP_CONTAINER_NAME
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://$MONGODB_USER:$MONGODB_PASSWORD@$MONGODB_DOCKER_CONTAINER_NAME:$MONGODB_DOCKER_PORT/$MONGODB_DATABASE?authSource=admin
+      
+
+volumes:
+  mongodb-data:
+
+
+networks:
+  default:
+    name: bottle-network
+
