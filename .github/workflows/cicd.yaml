@@ -1,0 +1,14 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  
+  #Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "build"
+    uses: ./build-gradle.yml@main
+    
