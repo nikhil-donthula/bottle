@@ -1,0 +1,7 @@
+name: deploy image to Azure Kubernetes Service(AKS)
+
+on:
+  workflow_call:
+
+  #Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
