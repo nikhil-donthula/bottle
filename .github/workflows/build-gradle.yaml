@@ -34,6 +34,9 @@ jobs:
        uses: gradle/gradle-build-action@v3.0.0
        with:
          gradle-version: '8.5'
+
+     - name: Execute Gradle build
+       run: ./gradlew build
        
      - name: Build and push Docker images
        uses: docker/build-push-action@v5.1.0
