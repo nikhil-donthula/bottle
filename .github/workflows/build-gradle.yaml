@@ -40,5 +40,5 @@ jobs:
        with:
          context: .
          push: true
-         tags: ghcr.io/ ${{ github.actor }}/bottle:1.0.2
+         tags: ghcr.io/${{ github.actor }}/bottle:1.0.2
   
