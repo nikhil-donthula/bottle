@@ -35,7 +35,7 @@ jobs:
    name: "PROD"
    permissions:
      packages: read
-   uses: ./.github/workflows/deploy-aks.yml
+   uses: ./.github/workflows/deploy-aks.yaml
    with:
       RUNNER_TAG: "prod"
       ENVIRONMENT: "PROD"
