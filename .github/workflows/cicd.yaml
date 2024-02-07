@@ -24,7 +24,7 @@ jobs:
    uses: ./.github/workflows/deploy-aks.yaml
    with:
       #RUNNER_TAG: "dev"
-      ENVIRONMENT: "DEV"
+      #ENVIRONMENT: "DEV"
       CLUSTER_RESOURCE_GROUP: "bottle-resource-group-dev"
       CLUSTER_NAME: "bottle-cluster-dev"
       CLUSTER_NAMESPACE: "bottle-dev"
