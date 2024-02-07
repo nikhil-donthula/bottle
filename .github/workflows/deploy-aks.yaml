@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+         token: ${{ secrets.CHECKOUT_TOKEN }}
 
       - name: Azure Login
         uses: Azure/login@v1.6.1
