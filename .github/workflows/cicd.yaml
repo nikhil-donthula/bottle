@@ -10,5 +10,36 @@ on:
 jobs:
   build:
     name: "build"
-    uses: ./build-gradle.yml@main
-    
+    permissions:
+      packages: write
+    uses: .github/workflows/build-gradle.yml@main
+
+  deploy-dev:
+   needs:
+      build
+   name: "DEV"
+   permissions:
+     packages: read
+   uses: .github/workflows/deploy-aks.yml@main
+   with:
+      RUNNER_TAG: "dev"
+      ENVIRONMENT: "DEV"
+      CLUSTER_RESOURCE_GROUP: "bottle-resource-group-dev"
+      CLUSTER_NAME: "bottle-cluster-dev"
+      CLUSTER_NAMESPACE: "bottle-dev"
+      secrets: inherit
+
+  deploy-prod:
+   needs:
+      deploy-dev
+   name: "PROD"
+   permissions:
+     packages: read
+   uses: .github/workflows/deploy-aks.yml@main
+   with:
+      RUNNER_TAG: "prod"
+      ENVIRONMENT: "PROD"
+      CLUSTER_RESOURCE_GROUP: "bottle-resource-group-prod"
+      CLUSTER_NAME: "bottle-cluster-prod"
+      CLUSTER_NAMESPACE: "bottle-prod"
+      secrets: inherit
