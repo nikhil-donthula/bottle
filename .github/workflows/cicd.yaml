@@ -12,7 +12,7 @@ jobs:
     name: "build"
     permissions:
       packages: write
-    uses: .github/workflows/build-gradle.yml@main
+    uses: ./.github/workflows/build-gradle.yml@main
 
   deploy-dev:
    needs:
@@ -20,7 +20,7 @@ jobs:
    name: "DEV"
    permissions:
      packages: read
-   uses: .github/workflows/deploy-aks.yml@main
+   uses: ./.github/workflows/deploy-aks.yml@main
    with:
       RUNNER_TAG: "dev"
       ENVIRONMENT: "DEV"
