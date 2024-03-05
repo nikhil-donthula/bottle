@@ -22,7 +22,7 @@ jobs:
    permissions:
      packages: read
    uses: ./.github/workflows/deploy-aks.yaml
-   with:
+   #with:
       #RUNNER_TAG: "dev"
       #ENVIRONMENT: "DEV"
       # CLUSTER_RESOURCE_GROUP: "bottle-resource-group-dev"
