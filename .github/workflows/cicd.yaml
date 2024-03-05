@@ -25,10 +25,10 @@ jobs:
    with:
       #RUNNER_TAG: "dev"
       #ENVIRONMENT: "DEV"
-      CLUSTER_RESOURCE_GROUP: "bottle-resource-group-dev"
-      CLUSTER_NAME: "bottle-cluster-dev"
-      CLUSTER_NAMESPACE: "bottle-dev"
-      secrets: inherit
+      # CLUSTER_RESOURCE_GROUP: "bottle-resource-group-dev"
+      # CLUSTER_NAME: "bottle-cluster-dev"
+      # CLUSTER_NAMESPACE: "bottle-dev"
+      # secrets: inherit
 
   # deploy-prod:
   #  needs:
