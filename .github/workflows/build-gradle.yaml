@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-push-image:
     name: build
-    runs-on: self-hosted #ubuntu-latest
+    runs-on: ubuntu-latest #self-hosted
     permissions:
       packages: write
 
