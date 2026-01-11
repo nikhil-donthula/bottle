@@ -202,7 +202,7 @@ Download cluster credentials
 az aks get-credentials --resource-group jan28 --name bottle-cluster --overwrite-existing
 ```
 Now you are connected to cluster
-
+ 
 
 Kubernetes pod errors:
 ErrImagePull > the initial error indicating a failed image pull. authentication error with ghcr.io OR image not prrsent in repo
